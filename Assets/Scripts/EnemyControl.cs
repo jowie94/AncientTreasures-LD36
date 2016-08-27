@@ -19,7 +19,7 @@ namespace MandarineStudio.AncientTreaseures
             if (col.gameObject.tag == "Player" && m_controller.IsAlive)
             {
                 float sym = transform.localScale.x/Mathf.Abs(transform.localScale.x);
-                Vector2 vector = new Vector2(col.transform.right.x * sym, col.transform.right.y);
+                Vector2 vector = new Vector2(transform.right.x * sym, transform.right.y);
                 m_direction *= -1;
                 col.gameObject.BroadcastMessage("EnemyCollision", new Damage(m_damage, vector));
             }
@@ -27,6 +27,7 @@ namespace MandarineStudio.AncientTreaseures
 
         void WeaponDamage(Damage damage)
         {
+            m_direction *= -1;
             m_controller.Damage(damage);
         }
 
