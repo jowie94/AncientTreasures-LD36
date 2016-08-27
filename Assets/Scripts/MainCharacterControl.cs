@@ -8,6 +8,7 @@ namespace MandarineStudio.AncientTreaseures
     {
         private PlatformerCharacterController m_controller;
         private Transform m_weaponBox;
+        private Transform m_feetBox;
         private bool m_jump;
 
         private bool Attacking
@@ -20,6 +21,7 @@ namespace MandarineStudio.AncientTreaseures
         {
             m_controller = GetComponent<PlatformerCharacterController>();
             m_weaponBox = transform.Find("WeaponBox");
+            m_feetBox = transform.Find("FeetBox");
         }
 
         // Update is called once per frame
@@ -34,6 +36,7 @@ namespace MandarineStudio.AncientTreaseures
             float move = Input.GetAxis("Horizontal");
             if (!Attacking)
                 m_controller.Move(move, m_jump);
+            m_feetBox.gameObject.SetActive(!m_controller.IsGrounded);
             m_jump = false;
             if (!Attacking && m_controller.IsGrounded && Input.GetButtonDown("Fire1"))
                 Attack();

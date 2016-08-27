@@ -31,6 +31,12 @@ namespace MandarineStudio.AncientTreaseures
             m_controller.Damage(damage);
         }
 
+        void FeetDamage(Damage damage)
+        {
+            m_direction *= -1;
+            m_controller.Damage(damage);
+        }
+
         // Use this for initialization
         void Awake()
         {
