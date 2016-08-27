@@ -45,6 +45,13 @@ namespace MandarineStudio.AncientTreaseures
         void Attack()
         {
             Attacking = true;
+            m_controller.Animator.Play("Attack", true);
+            m_controller.Animator.onFinish.AddListener(() =>
+            {
+                Attacking = false;
+                m_controller.SetIdle();
+                //m_controller.Animator.onFinish.RemoveListener();
+            });
             StartCoroutine(DisableAttack());
         }
 

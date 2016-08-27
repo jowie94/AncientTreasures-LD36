@@ -23,6 +23,11 @@ namespace MandarineStudio.AncientTreaseures
             get { return m_life > 0; }
         }
 
+        public SpriteAnimator Animator
+        {
+            get { return m_animator; }
+        }
+
         [SerializeField] private float m_JumpForce = 100f;
         [SerializeField] private float m_MaxSpeed = 10f;
         [SerializeField] private LayerMask m_WhatIsGround;
@@ -31,7 +36,7 @@ namespace MandarineStudio.AncientTreaseures
         private Transform m_groundCheck;
         const float k_GroundedRadius = .2f;
         private Rigidbody2D m_rigidbody2D;
-        private SpriteAnimator m_animator;
+        public SpriteAnimator m_animator;
         private bool m_facingRight = true;
         private bool m_grounded = true;
         
@@ -44,6 +49,7 @@ namespace MandarineStudio.AncientTreaseures
 
         void FixedUpdate()
         {
+            bool wasGrounded = m_grounded;
             m_grounded = false;
 
             // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
@@ -54,12 +60,21 @@ namespace MandarineStudio.AncientTreaseures
                 if (col.gameObject != gameObject)
                     m_grounded = true;
             }
+
+            if (!m_grounded)
+                m_animator.Play("Jump");
+            else if (!wasGrounded)
+                m_animator.Play("Idle");
         }
 
         public void Move(float move, bool jump)
         {
             // TODO: Set movement animation
             m_rigidbody2D.velocity = new Vector2(move*m_MaxSpeed, m_rigidbody2D.velocity.y);
+            if (move != 0)
+                m_animator.Play("Walk");
+            else if (m_animator.CurrentAnimation == "Walk")
+                m_animator.Play("Idle");
 
             if (move > 0 && !m_facingRight)
             {
@@ -76,7 +91,7 @@ namespace MandarineStudio.AncientTreaseures
             if (m_grounded && jump)
             {
                 m_grounded = false;
-                // TODO: Set jump animation
+                m_animator.Play("Jump");
                 m_rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
             }
         }
@@ -112,6 +127,10 @@ namespace MandarineStudio.AncientTreaseures
         private void Die()
         {
             Destroy(gameObject, 1.0f);
+        }
+        public void SetIdle()
+        {
+            m_animator.Play("Idle");
         }
     }
 }
