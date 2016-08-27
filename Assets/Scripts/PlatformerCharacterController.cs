@@ -105,6 +105,7 @@ namespace MandarineStudio.AncientTreaseures
         {
             // TODO: Launch animation and subscribe to its end
             m_rigidbody2D.isKinematic = true;
+            GetComponent<Collider2D>().isTrigger = true;
             Die();
         }
 
