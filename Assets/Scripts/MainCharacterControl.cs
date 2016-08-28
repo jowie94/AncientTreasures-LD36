@@ -22,6 +22,7 @@ namespace MandarineStudio.AncientTreaseures
             m_controller = GetComponent<PlatformerCharacterController>();
             m_weaponBox = transform.Find("WeaponBox");
             m_feetBox = transform.Find("FeetBox");
+            GameManager.Instance.Life = m_controller.Life;
         }
 
         // Update is called once per frame
@@ -40,6 +41,7 @@ namespace MandarineStudio.AncientTreaseures
             m_jump = false;
             if (!Attacking && m_controller.IsGrounded && Input.GetButtonDown("Fire1"))
                 Attack();
+            GameManager.Instance.Life = m_controller.Life;
         }
 
         void Attack()
