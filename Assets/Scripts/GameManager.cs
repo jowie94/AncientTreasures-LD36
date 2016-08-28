@@ -39,5 +39,10 @@ namespace MandarineStudio.AncientTreaseures
         {
             
         }
+
+        void OnLevelWasLoaded()
+        {
+            m_eventSystem.Reset();
+        }
     }
 }

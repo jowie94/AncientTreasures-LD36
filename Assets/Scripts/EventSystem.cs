@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 namespace MandarineStudio.AncientTreaseures
 {
-    public class EventSystem : MonoBehaviour
+    public class EventSystem
     {
         private Dictionary<string, UnityEvent<List<object>>> m_eventsParams = new Dictionary<string, UnityEvent<List<object>>>();
         private Dictionary<string, UnityEvent> m_events = new Dictionary<string, UnityEvent>();
@@ -36,6 +36,12 @@ namespace MandarineStudio.AncientTreaseures
                 m_events[eventName].Invoke();
             else
                 Debug.LogError("Event with name " + eventName + " does not exists!");
+        }
+
+        public void Reset()
+        {
+            m_events.Clear();
+            m_eventsParams.Clear();
         }
     }
 }
