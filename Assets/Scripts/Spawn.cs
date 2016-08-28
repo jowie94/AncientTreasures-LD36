@@ -2,28 +2,31 @@
 using System.Collections;
 using MandarineStudio.AncientTreasures;
 
-public class Spawn : MonoBehaviour
+namespace MandarineStudio.AncientTreasures
 {
-    public bool IsCheckpoint = false;
-
-    void OnTrigerEnter2D(Collider2D other)
+    public class Spawn : MonoBehaviour
     {
-        if (IsCheckpoint)
-            GameManager.Instance.Checkpoint(this);
-    }
+        public bool IsCheckpoint = false;
 
-    public void SpawnPlayer()
-    {
-        GameObject player = (GameObject) Instantiate(Resources.Load("Prefabs/Player"));
-        player.name = "Player";
-        player.transform.position = transform.position;
-        player.GetComponent<PlatformerCharacterController>().Life = GameManager.Instance.Life;
-        CameraMovement camera = GameObject.Find("Main Camera").GetComponent<CameraMovement>();
-        camera.Target = player.transform;
-    }
+        void OnTrigerEnter2D(Collider2D other)
+        {
+            if (IsCheckpoint)
+                GameManager.Instance.Checkpoint(this);
+        }
 
-    void Start()
-    {
-        SpawnPlayer();
+        public void SpawnPlayer()
+        {
+            GameObject player = (GameObject) Instantiate(Resources.Load("Prefabs/Player"));
+            player.name = "Player";
+            player.transform.position = transform.position;
+            player.GetComponent<PlatformerCharacterController>().Life = GameManager.Instance.Life;
+            CameraMovement camera = GameObject.Find("Main Camera").GetComponent<CameraMovement>();
+            camera.Target = player.transform;
+        }
+
+        void Start()
+        {
+            SpawnPlayer();
+        }
     }
 }
