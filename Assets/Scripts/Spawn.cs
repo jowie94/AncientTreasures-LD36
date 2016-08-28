@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using MandarineStudio.AncientTreaseures;
+using MandarineStudio.AncientTreasures;
 
 public class Spawn : MonoBehaviour
 {
@@ -20,16 +20,5 @@ public class Spawn : MonoBehaviour
         player.GetComponent<PlatformerCharacterController>().Life = GameManager.Instance.Life;
         CameraMovement camera = GameObject.Find("Main Camera").GetComponent<CameraMovement>();
         camera.Target = player.transform;
-    }
-
-    // Use this for initialization
-    void Start ()
-    {
-        SpawnPlayer();
-    }
-    
-    // Update is called once per frame
-    void Update () {
-    
     }
 }

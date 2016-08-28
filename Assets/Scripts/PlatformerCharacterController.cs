@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 // ReSharper disable CheckNamespace
 
-namespace MandarineStudio.AncientTreaseures
+namespace MandarineStudio.AncientTreasures
 {
     [RequireComponent(typeof(Rigidbody2D), typeof(SpriteAnimator))]
     public class PlatformerCharacterController : MonoBehaviour

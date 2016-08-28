@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace MandarineStudio.AncientTreaseures
+namespace MandarineStudio.AncientTreasures
 {
     [RequireComponent(typeof(PlatformerCharacterController))]
     public class EnemyControl : MonoBehaviour

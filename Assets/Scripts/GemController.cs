@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MandarineStudio.AncientTreaseures
+namespace MandarineStudio.AncientTreasures
 {
     [RequireComponent(typeof(BoxCollider2D))]
     public class GemController : MonoBehaviour

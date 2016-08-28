@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MandarineStudio.AncientTreaseures
+namespace MandarineStudio.AncientTreasures
 {
     public class WeaponCollision : MonoBehaviour
     {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.Events;
 
-namespace MandarineStudio.AncientTreaseures
+namespace MandarineStudio.AncientTreasures
 {
     public class EventSystem
     {

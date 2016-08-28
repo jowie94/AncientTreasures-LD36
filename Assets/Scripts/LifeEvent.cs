@@ -1,6 +1,6 @@
 ﻿using UnityEngine.Events;
 
-namespace MandarineStudio.AncientTreaseures
+namespace MandarineStudio.AncientTreasures
 {
     public class LifeEvent : UnityEvent<float> {}
 }

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MandarineStudio.AncientTreaseures
+namespace MandarineStudio.AncientTreasures
 {
     class GameState : ScriptableObject
     {

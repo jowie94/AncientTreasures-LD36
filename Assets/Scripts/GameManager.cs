@@ -4,6 +4,7 @@ using System.Runtime.Remoting.Lifetime;
 using UnityEngine.UI;
 
 namespace MandarineStudio.AncientTreaseures
+namespace MandarineStudio.AncientTreasures
 {
     public class GameManager : MonoBehaviour
     {
