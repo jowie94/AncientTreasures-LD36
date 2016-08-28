@@ -96,22 +96,37 @@ namespace MandarineStudio.AncientTreasures
             if (obj)
             {
                 m_lastCheckpoint = obj.GetComponent<Spawn>();
-                m_lastCheckpointState = Instantiate(m_gameState);
+                m_gameState.Entities = GameObject.Find("Entities");
+                TakeSnapshot();
             }
         }
 
         public void Checkpoint(Spawn spawn)
         {
-            m_lastCheckpointState = Instantiate(m_gameState);
+            TakeSnapshot();
             m_lastCheckpoint = spawn;
         }
 
         public void ReloadCheckpoint()
         {
-            m_gameState = m_lastCheckpointState;
+            Destroy(m_gameState.Entities);
+            m_gameState = Instantiate(m_lastCheckpointState);
+            m_gameState.name = "GameState";
+            m_gameState.Entities = Instantiate(m_lastCheckpointState.Entities);
+            m_gameState.Entities.SetActive(true);
+            m_gameState.Entities.name = "Entities";
             PlatformerCharacterController pcc = m_lastCheckpoint.SpawnPlayer();
             pcc.OnLife.AddListener(life => Life = life);
             pcc.OnDied.AddListener(ReloadCheckpoint);
+        }
+
+        void TakeSnapshot()
+        {
+            m_lastCheckpointState = Instantiate(m_gameState);
+            m_lastCheckpointState.name = "GameStateCheckpoint";
+            m_lastCheckpointState.Entities = Instantiate(m_gameState.Entities);
+            m_lastCheckpointState.Entities.name = "EntitiesSave";
+            m_lastCheckpointState.Entities.SetActive(false);
         }
 
         public void LoadLevel(string level)
