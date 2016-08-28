@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Runtime.Remoting.Lifetime;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace MandarineStudio.AncientTreaseures
 namespace MandarineStudio.AncientTreasures
 {
     public class GameManager : MonoBehaviour
@@ -92,7 +92,12 @@ namespace MandarineStudio.AncientTreasures
                     m_playerCharacter.OnDied.AddListener(ReloadCheckpoint);
                 }
             }
-
+            obj = GameObject.Find("Spawn");
+            if (obj)
+            {
+                m_lastCheckpoint = obj.GetComponent<Spawn>();
+                m_lastCheckpointState = Instantiate(m_gameState);
+            }
         }
 
         public void Checkpoint(Spawn spawn)
