@@ -30,6 +30,16 @@ namespace MandarineStudio.AncientTreasures
             }
         }
 
+        void OnCollisionStay2D(Collision2D col)
+        {
+            if (col.gameObject.tag == "Player" && m_controller.IsAlive)
+            {
+                float sym = transform.localScale.x / Mathf.Abs(transform.localScale.x);
+                Vector2 vector = new Vector2(transform.right.x * sym, transform.right.y);
+                col.gameObject.BroadcastMessage("EnemyCollision", new Damage(m_damage, vector));
+            }
+        }
+
         protected abstract void FeetDamage(Damage damage);
 
         protected abstract void WeaponDamage(Damage damage);
