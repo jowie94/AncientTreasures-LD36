@@ -21,4 +21,9 @@ public class Spawn : MonoBehaviour
         CameraMovement camera = GameObject.Find("Main Camera").GetComponent<CameraMovement>();
         camera.Target = player.transform;
     }
+
+    void Start()
+    {
+        SpawnPlayer();
+    }
 }
