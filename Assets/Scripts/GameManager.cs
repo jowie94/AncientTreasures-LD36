@@ -10,7 +10,12 @@ namespace MandarineStudio.AncientTreaseures
             get
             {
                 if (m_instance == null)
-                    m_instance = Instantiate(new GameManager());
+                {
+                    GameObject go = new GameObject();
+                    m_instance = go.AddComponent<GameManager>();
+                    go.name = "Game Manager";
+                    DontDestroyOnLoad(go);   
+                }
                 return m_instance;
             }
         }
