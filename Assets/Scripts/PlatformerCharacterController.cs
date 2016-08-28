@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Events;
+
 // ReSharper disable CheckNamespace
 
 namespace MandarineStudio.AncientTreaseures
@@ -15,7 +17,11 @@ namespace MandarineStudio.AncientTreaseures
         public float Life
         {
             get { return m_life; }
-            set { m_life = value; }
+            set
+            {
+                OnLife.Invoke(value);
+                m_life = value;
+            }
         }
 
         public bool IsAlive
@@ -28,6 +34,9 @@ namespace MandarineStudio.AncientTreaseures
             get { return m_animator; }
         }
 
+        public UnityEvent OnDied = new UnityEvent();
+        public LifeEvent OnLife = new LifeEvent();
+
         [SerializeField] private float m_JumpForce = 100f;
         [SerializeField] private float m_MaxSpeed = 10f;
         [SerializeField] private LayerMask m_WhatIsGround;
@@ -36,9 +45,9 @@ namespace MandarineStudio.AncientTreaseures
         private Transform m_groundCheck;
         const float k_GroundedRadius = .2f;
         private Rigidbody2D m_rigidbody2D;
-        public SpriteAnimator m_animator;
+        private SpriteAnimator m_animator;
         private bool m_facingRight = true;
-        private bool m_grounded = true;
+        public bool m_grounded = true;
         
         void Awake()
         {
@@ -69,9 +78,8 @@ namespace MandarineStudio.AncientTreaseures
 
         public void Move(float move, bool jump)
         {
-            // TODO: Set movement animation
             m_rigidbody2D.velocity = new Vector2(move*m_MaxSpeed, m_rigidbody2D.velocity.y);
-            if (move != 0)
+            if (move != 0 && m_grounded)
                 m_animator.Play("Walk");
             else if (m_animator.CurrentAnimation == "Walk")
                 m_animator.Play("Idle");
@@ -109,7 +117,7 @@ namespace MandarineStudio.AncientTreaseures
 
         public void Damage(Damage damage)
         {
-            m_life -= damage.Amount;
+            Life -= damage.Amount;
             if (!IsAlive)
                 TriggerDeath();
             else
@@ -126,8 +134,10 @@ namespace MandarineStudio.AncientTreaseures
 
         private void Die()
         {
+            OnDied.Invoke();
             Destroy(gameObject, 1.0f);
         }
+
         public void SetIdle()
         {
             m_animator.Play("Idle");

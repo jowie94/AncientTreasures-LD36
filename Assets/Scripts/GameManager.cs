@@ -42,17 +42,15 @@ namespace MandarineStudio.AncientTreaseures
         private EventSystem m_eventSystem = new EventSystem();
         private Text m_scoreText;
         private Text m_lifeText;
+        private GameState m_lastCheckpointState;
+        private Spawn m_lastCheckpoint;
         private GameState m_gameState;
+        private PlatformerCharacterController m_playerCharacter;
 
         void Awake()
         {
             m_gameState = ScriptableObject.CreateInstance<GameState>();
-            GameObject obj = GameObject.Find("ScoreText");
-            if (obj != null)
-                m_scoreText = obj.GetComponent<Text>();
-            obj = GameObject.Find("LifeText");
-            if (obj != null)
-                m_lifeText = obj.GetComponent<Text>();
+            ReloadComponents();
         }
 
         public void GemCollected()
@@ -72,12 +70,40 @@ namespace MandarineStudio.AncientTreaseures
         void OnLevelWasLoaded()
         {
             m_eventSystem.Reset();
+            ReloadComponents();
+        }
+
+        private void ReloadComponents()
+        {
             GameObject obj = GameObject.Find("ScoreText");
             if (obj != null)
                 m_scoreText = obj.GetComponent<Text>();
             obj = GameObject.Find("LifeText");
             if (obj != null)
                 m_lifeText = obj.GetComponent<Text>();
+            obj = GameObject.Find("Player");
+            if (obj != null)
+            {
+                m_playerCharacter = obj.GetComponent<PlatformerCharacterController>();
+                if (m_playerCharacter)
+                {
+                    m_playerCharacter.OnLife.AddListener(life => Life = life);
+                    m_playerCharacter.OnDied.AddListener(() => {}); // TODO
+                }
+            }
+
+        }
+
+        public void Checkpoint(Spawn spawn)
+        {
+            m_lastCheckpointState = Instantiate(m_gameState);
+            m_lastCheckpoint = spawn;
+        }
+
+        public void ReloadCheckpoint()
+        {
+            m_gameState = m_lastCheckpointState;
+            m_lastCheckpoint.SpawnPlayer();
         }
 
         public void SaveGame()

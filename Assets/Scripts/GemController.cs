@@ -1,17 +1,18 @@
 ﻿using UnityEngine;
-using System.Collections;
-using MandarineStudio.AncientTreaseures;
 
-[RequireComponent(typeof(BoxCollider2D))]
-public class GemController : MonoBehaviour
+namespace MandarineStudio.AncientTreaseures
 {
-
-    void OnTriggerEnter2D(Collider2D other)
+    [RequireComponent(typeof(BoxCollider2D))]
+    public class GemController : MonoBehaviour
     {
-        if (other.gameObject.tag == "Player")
+
+        void OnTriggerEnter2D(Collider2D other)
         {
-            GameManager.Instance.GemCollected();
-            Destroy(gameObject);
+            if (other.gameObject.tag == "Player")
+            {
+                GameManager.Instance.GemCollected();
+                Destroy(gameObject);
+            }
         }
     }
 }
