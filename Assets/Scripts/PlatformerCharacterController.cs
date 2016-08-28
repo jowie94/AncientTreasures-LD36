@@ -124,7 +124,7 @@ namespace MandarineStudio.AncientTreasures
                 m_rigidbody2D.AddForce(damage.Direction*3000f);
         }
 
-        private void TriggerDeath()
+        public void TriggerDeath()
         {
             // TODO: Launch animation and subscribe to its end
             m_rigidbody2D.isKinematic = true;
@@ -132,10 +132,15 @@ namespace MandarineStudio.AncientTreasures
             Die();
         }
 
-        private void Die()
+        public void Die(bool inmediate = false)
         {
-            Destroy(gameObject, 1.0f);
+            float time = 0.0f;
+            if (!inmediate)
+                time = 1f;
             OnDied.Invoke();
+            OnDied.RemoveAllListeners();
+            OnLife.RemoveAllListeners();
+            Destroy(gameObject, time);
         }
 
         public void SetIdle()

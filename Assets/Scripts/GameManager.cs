@@ -109,7 +109,9 @@ namespace MandarineStudio.AncientTreasures
         public void ReloadCheckpoint()
         {
             m_gameState = m_lastCheckpointState;
-            m_lastCheckpoint.SpawnPlayer();
+            PlatformerCharacterController pcc = m_lastCheckpoint.SpawnPlayer();
+            pcc.OnLife.AddListener(life => Life = life);
+            pcc.OnDied.AddListener(ReloadCheckpoint);
         }
 
         public void LoadLevel(string level)

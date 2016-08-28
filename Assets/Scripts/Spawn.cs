@@ -14,14 +14,16 @@ namespace MandarineStudio.AncientTreasures
                 GameManager.Instance.Checkpoint(this);
         }
 
-        public void SpawnPlayer()
+        public PlatformerCharacterController SpawnPlayer()
         {
             GameObject player = (GameObject) Instantiate(Resources.Load("Prefabs/Player"));
             player.name = "Player";
             player.transform.position = transform.position;
-            player.GetComponent<PlatformerCharacterController>().Life = GameManager.Instance.Life;
+            PlatformerCharacterController pcc = player.GetComponent<PlatformerCharacterController>();
+            pcc.Life = GameManager.Instance.Life;
             CameraMovement camera = GameObject.Find("Main Camera").GetComponent<CameraMovement>();
             camera.Target = player.transform;
+            return pcc;
         }
 
         void Start()
