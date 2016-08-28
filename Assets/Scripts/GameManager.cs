@@ -112,6 +112,11 @@ namespace MandarineStudio.AncientTreasures
             m_lastCheckpoint.SpawnPlayer();
         }
 
+        public void LoadLevel(string level)
+        {
+            SceneManager.LoadScene("Scenes/" + level);
+        }
+
         public void SaveGame()
         {
 
