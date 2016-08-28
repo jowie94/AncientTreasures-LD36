@@ -58,22 +58,26 @@ namespace MandarineStudio.AncientTreasures
 
         void FixedUpdate()
         {
-            bool wasGrounded = m_grounded;
-            m_grounded = false;
-
-            // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
-            // This can be done using layers instead but Sample Assets will not overwrite your project settings.
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(m_groundCheck.position, k_GroundedRadius, m_WhatIsGround);
-            foreach (Collider2D col in colliders)
+            if (IsAlive)
             {
-                if (col.gameObject != gameObject)
-                    m_grounded = true;
-            }
+                bool wasGrounded = m_grounded;
+                m_grounded = false;
 
-            if (!m_grounded)
-                m_animator.Play("Jump");
-            else if (!wasGrounded)
-                m_animator.Play("Idle");
+                // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
+                // This can be done using layers instead but Sample Assets will not overwrite your project settings.
+                Collider2D[] colliders = Physics2D.OverlapCircleAll(m_groundCheck.position, k_GroundedRadius,
+                    m_WhatIsGround);
+                foreach (Collider2D col in colliders)
+                {
+                    if (col.gameObject != gameObject)
+                        m_grounded = true;
+                }
+
+                if (!m_grounded)
+                    m_animator.Play("Jump");
+                else if (!wasGrounded)
+                    m_animator.Play("Idle");
+            }
         }
 
         public void Move(float move, bool jump)
@@ -121,7 +125,10 @@ namespace MandarineStudio.AncientTreasures
             if (!IsAlive)
                 TriggerDeath();
             else
+            {
+                m_rigidbody2D.velocity = Vector2.zero;
                 m_rigidbody2D.AddForce(damage.Direction*3000f);
+            }
         }
 
         public void TriggerDeath()
