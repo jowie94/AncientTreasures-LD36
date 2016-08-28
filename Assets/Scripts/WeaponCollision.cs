@@ -8,7 +8,7 @@ namespace MandarineStudio.AncientTreasures
 
         void OnTriggerEnter2D(Collider2D col)
         {
-            if (col.gameObject.tag == "Enemy")
+            if (col.tag == "Enemy" || col.tag == "Hit Trigger")
             {
                 float sym = transform.parent.localScale.x / Mathf.Abs(transform.parent.localScale.x);
                 Vector2 vector = new Vector2(transform.right.x * sym, transform.right.y);
