@@ -15,11 +15,13 @@ namespace MandarineStudio.AncientTreasures
             }
         }
 
-        public float Speed = 1.0f;
+        const float Step = 1f;
 
+        private float m_currentStep = Step;
         private Transform m_target;
         private bool m_stopped;
         private Vector3 m_lastPosition;
+        private Vector3 m_lastCameraPosition;
         private float m_zDistance;
 
         void Awake()
@@ -34,16 +36,27 @@ namespace MandarineStudio.AncientTreasures
         // Update is called once per frame
         void LateUpdate()
         {
-            float smooth = 1.0f - Mathf.Pow(0.5f, Time.deltaTime*Speed);
-            Vector3 result = Vector3.Lerp(transform.position, Target.position, smooth);
-            result.z = m_zDistance;
-            transform.position = result;
+            if (m_lastPosition == Target.position && m_lastCameraPosition == transform.position)
+            {
+                m_currentStep = Step;
+            }
+            else
+            {
+                m_lastCameraPosition = transform.position;
+                Vector3 result = Vector3.Lerp(transform.position, Target.position, 1 - m_currentStep);
+                m_currentStep -= Time.deltaTime*0.1f;
+                result.z = m_zDistance;
+                transform.position = result;
+                m_lastPosition = Target.position;
+            }
         }
 
         public void ForcePosition(Vector3 position)
         {
+            m_lastPosition = position;
             position.z = m_zDistance;
             transform.position = position;
+            m_lastCameraPosition = transform.position;
         }
     }
 }
