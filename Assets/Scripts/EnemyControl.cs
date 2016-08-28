@@ -4,15 +4,20 @@ using System.Collections;
 namespace MandarineStudio.AncientTreasures
 {
     [RequireComponent(typeof(PlatformerCharacterController))]
-    public class EnemyControl : MonoBehaviour
+    public abstract class EnemyControl : MonoBehaviour
     {
+        protected PlatformerCharacterController Controller
+        {
+            get { return m_controller; }
+        }
+
         [SerializeField] private LayerMask m_WhatIsWall;
         [SerializeField] private float m_damage;
 
         const float k_GroundedRadius = .2f;
         private PlatformerCharacterController m_controller;
         private Transform m_sideCollision;
-        public float m_direction = 1f;
+        private float m_direction = 1f;
 
         void OnCollisionEnter2D(Collision2D col)
         {
@@ -20,23 +25,15 @@ namespace MandarineStudio.AncientTreasures
             {
                 float sym = transform.localScale.x/Mathf.Abs(transform.localScale.x);
                 Vector2 vector = new Vector2(transform.right.x * sym, transform.right.y);
-                m_direction *= -1;
+                Flip();
                 col.gameObject.BroadcastMessage("EnemyCollision", new Damage(m_damage, vector));
             }
         }
 
-        void WeaponDamage(Damage damage)
-        {
-            m_direction *= -1;
-            m_controller.Damage(damage);
-        }
+        protected abstract void FeetDamage(Damage damage);
 
-        void FeetDamage(Damage damage)
-        {
-            m_direction *= -1;
-            m_controller.Damage(damage);
-        }
-
+        protected abstract void WeaponDamage(Damage damage);
+        
         // Use this for initialization
         void Awake()
         {
@@ -58,10 +55,14 @@ namespace MandarineStudio.AncientTreasures
                 }
 
                 if (hasCollided)
-                    m_direction *= -1;
+                    Flip();
                 m_controller.Move(0.1f*m_direction, false);
             }
         }
-    }
 
+        protected void Flip()
+        {
+            m_direction *= -1;
+        }
+    }
 }

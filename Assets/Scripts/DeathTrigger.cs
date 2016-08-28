@@ -9,7 +9,7 @@ namespace MandarineStudio.AncientTreasures
         {
             if (other.tag == "Player")
             {
-                other.GetComponent<PlatformerCharacterController>().Die(true);
+                other.GetComponent<PlatformerCharacterController>().Die();
             }
         }
         // Use this for initialization

@@ -126,21 +126,20 @@ namespace MandarineStudio.AncientTreasures
 
         public void TriggerDeath()
         {
-            // TODO: Launch animation and subscribe to its end
+            
             m_rigidbody2D.isKinematic = true;
             GetComponent<Collider2D>().isTrigger = true;
-            Die();
+            m_animator.Stop();
+            m_animator.onStop.AddListener(() => Die());
+            m_animator.Play("Die", true);
         }
 
-        public void Die(bool inmediate = false)
+        public void Die()
         {
-            float time = 0.0f;
-            if (!inmediate)
-                time = 1f;
             OnDied.Invoke();
             OnDied.RemoveAllListeners();
             OnLife.RemoveAllListeners();
-            Destroy(gameObject, time);
+            Destroy(gameObject);
         }
 
         public void SetIdle()
