@@ -130,7 +130,7 @@ namespace MandarineStudio.AncientTreasures
             m_rigidbody2D.isKinematic = true;
             GetComponent<Collider2D>().isTrigger = true;
             m_animator.Stop();
-            m_animator.onStop.AddListener(() => Die());
+            m_animator.onStop.AddListener(Die);
             m_animator.Play("Die", true);
         }
 

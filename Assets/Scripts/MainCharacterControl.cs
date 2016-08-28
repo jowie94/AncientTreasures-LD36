@@ -33,13 +33,16 @@ namespace MandarineStudio.AncientTreasures
 
         void FixedUpdate()
         {
-            float move = Input.GetAxis("Horizontal");
-            if (!Attacking)
-                m_controller.Move(move, m_jump);
-            m_feetBox.gameObject.SetActive(!m_controller.IsGrounded);
-            m_jump = false;
-            if (!Attacking && m_controller.IsGrounded && Input.GetButtonDown("Fire1"))
-                Attack();
+            if (m_controller.IsAlive)
+            {
+                float move = Input.GetAxis("Horizontal");
+                if (!Attacking)
+                    m_controller.Move(move, m_jump);
+                m_feetBox.gameObject.SetActive(!m_controller.IsGrounded);
+                m_jump = false;
+                if (!Attacking && m_controller.IsGrounded && Input.GetButtonDown("Fire1"))
+                    Attack();
+            }
         }
 
         void Attack()
