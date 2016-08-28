@@ -134,8 +134,8 @@ namespace MandarineStudio.AncientTreaseures
 
         private void Die()
         {
-            OnDied.Invoke();
             Destroy(gameObject, 1.0f);
+            OnDied.Invoke();
         }
 
         public void SetIdle()

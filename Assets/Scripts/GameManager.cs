@@ -88,7 +88,7 @@ namespace MandarineStudio.AncientTreaseures
                 if (m_playerCharacter)
                 {
                     m_playerCharacter.OnLife.AddListener(life => Life = life);
-                    m_playerCharacter.OnDied.AddListener(() => {}); // TODO
+                    m_playerCharacter.OnDied.AddListener(ReloadCheckpoint);
                 }
             }
 
