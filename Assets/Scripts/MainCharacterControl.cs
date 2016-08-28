@@ -7,9 +7,12 @@ namespace MandarineStudio.AncientTreasures
     public class MainCharacterControl : MonoBehaviour
     {
         private PlatformerCharacterController m_controller;
+        private Rigidbody2D m_rigidbody;
         private Transform m_weaponBox;
         private Transform m_feetBox;
         private bool m_jump;
+        private bool m_blinking = false;
+        private Renderer m_renderer;
 
         private bool Attacking
         {
@@ -22,6 +25,8 @@ namespace MandarineStudio.AncientTreasures
             m_controller = GetComponent<PlatformerCharacterController>();
             m_weaponBox = transform.Find("WeaponBox");
             m_feetBox = transform.Find("FeetBox");
+            m_rigidbody = GetComponent<Rigidbody2D>();
+            m_renderer = GetComponent<Renderer>();
         }
 
         // Update is called once per frame
@@ -48,6 +53,7 @@ namespace MandarineStudio.AncientTreasures
         void Attack()
         {
             Attacking = true;
+            m_rigidbody.velocity = Vector2.zero;
             m_controller.Animator.Play("Attack", true);
             m_controller.Animator.onFinish.AddListener(() =>
             {
@@ -55,20 +61,30 @@ namespace MandarineStudio.AncientTreasures
                 m_controller.SetIdle();
                 //m_controller.Animator.onFinish.RemoveListener();
             });
-            StartCoroutine(DisableAttack());
         }
 
-        // TODO: Temporal while waiting for animations
-        IEnumerator DisableAttack()
+        IEnumerator DamageBlink()
         {
-            yield return new WaitForSeconds(0.5f);
-            Attacking = false;
-            yield return null;
+            m_blinking = true;
+            for (int n = 0; n < 5; n++)
+            {
+                m_renderer.enabled = true;
+                yield return new WaitForSeconds(0.1f);
+                m_renderer.enabled = false;
+                yield return new WaitForSeconds(0.1f);
+            }
+            m_renderer.enabled = true;
+            m_blinking = false;
         }
 
         void EnemyCollision(Damage damage)
         {
-            m_controller.Damage(damage);
+            if (!m_blinking)
+            {
+                m_controller.Damage(damage);
+                if (m_controller.IsAlive)
+                    StartCoroutine(DamageBlink());
+            }
         }
     }
 }
