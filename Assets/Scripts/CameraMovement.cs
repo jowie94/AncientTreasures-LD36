@@ -19,14 +19,12 @@ namespace MandarineStudio.AncientTreasures
 
         private float m_currentStep = Step;
         private Transform m_target;
-        private bool m_stopped;
         private Vector3 m_lastPosition;
         private Vector3 m_lastCameraPosition;
         private float m_zDistance;
 
         void Awake()
         {
-            m_stopped = true;
             m_zDistance = transform.position.z;
             //m_lastPosition = Target.position;
             //m_lastPosition.z = m_zDistance;
