@@ -19,8 +19,10 @@ namespace MandarineStudio.AncientTreasures
             get { return m_life; }
             set
             {
-                OnLife.Invoke(value);
+                if (value > m_maxLife)
+                    value = m_maxLife;
                 m_life = value;
+                OnLife.Invoke(value);
             }
         }
 
@@ -40,6 +42,7 @@ namespace MandarineStudio.AncientTreasures
         [SerializeField] private float m_JumpForce = 100f;
         [SerializeField] private float m_MaxSpeed = 10f;
         [SerializeField] private LayerMask m_WhatIsGround;
+        [SerializeField] private float m_maxLife;
         [SerializeField] private float m_life;
 
         private Transform m_groundCheck;
@@ -47,7 +50,7 @@ namespace MandarineStudio.AncientTreasures
         private Rigidbody2D m_rigidbody2D;
         private SpriteAnimator m_animator;
         private bool m_facingRight = true;
-        public bool m_grounded = true;
+        private bool m_grounded = true;
         
         void Awake()
         {

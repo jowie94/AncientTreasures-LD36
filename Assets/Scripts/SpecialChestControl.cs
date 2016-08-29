@@ -3,10 +3,8 @@
 namespace MandarineStudio.AncientTreasures
 {
     [RequireComponent(typeof(UseOnPlayerTrigger))]
-    public class ChestControl : MonoBehaviour
+    public class SpecialChestControl : MonoBehaviour
     {
-        public float NumberOfGems = 0f;
-
         private SpriteAnimator m_animator;
         void Awake()
         {
@@ -23,7 +21,7 @@ namespace MandarineStudio.AncientTreasures
         {
             m_animator.onStop.RemoveListener(Give);
             m_animator.Play("Opened");
-            GameManager.Instance.ChestOpened(NumberOfGems);
+            GameManager.Instance.SpecialChestOpened();
         }
     }
 }

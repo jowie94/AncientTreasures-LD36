@@ -61,9 +61,26 @@ namespace MandarineStudio.AncientTreasures
             m_gameState.Score += amount;
         }
 
+        public void SpecialChestOpened()
+        {
+            m_playerCharacter.Animator.Play("Win", true);
+            m_playerCharacter.Animator.onStop.AddListener(Won);
+        }
+
+        void Won()
+        {
+            m_playerCharacter.Animator.onStop.RemoveListener(Won);
+            LoadLevel("Won");
+        }
+
         public void GemCollected()
         {
             m_gameState.Score += 1f;
+        }
+
+        public void LiveCollected()
+        {
+            m_playerCharacter.Life += 1;
         }
 
         void LateUpdate()
