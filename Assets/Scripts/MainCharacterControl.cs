@@ -36,7 +36,7 @@ namespace MandarineStudio.AncientTreasures
 
         void FixedUpdate()
         {
-            if (m_controller.IsAlive)
+            if (m_controller.IsAlive && GameManager.Instance.AllowMovement)
             {
                 float move = Input.GetAxis("Horizontal");
                 if (!Attacking)

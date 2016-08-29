@@ -39,9 +39,9 @@ namespace MandarineStudio.AncientTreasures
             private set { m_gameState.Life = value; }
         }
 
-        public bool MoveEnemies
+        public bool AllowMovement
         {
-            get { return m_moveEnemies; }
+            get { return m_allowMovement; }
         }
 
         public bool SpawnPlayer = true;
@@ -54,7 +54,7 @@ namespace MandarineStudio.AncientTreasures
         private Spawn m_lastCheckpoint;
         private GameState m_gameState;
         private PlatformerCharacterController m_playerCharacter;
-        private bool m_moveEnemies = true;
+        private bool m_allowMovement = true;
 
         void Awake()
         {
@@ -71,6 +71,7 @@ namespace MandarineStudio.AncientTreasures
 
         public void SpecialChestOpened()
         {
+            m_allowMovement = false;
             m_playerCharacter.Animator.Play("Win", true);
             m_playerCharacter.Animator.onStop.AddListener(Won);
         }
@@ -79,6 +80,7 @@ namespace MandarineStudio.AncientTreasures
         {
             m_playerCharacter.Animator.onStop.RemoveListener(Won);
             LoadLevel("Won");
+            m_allowMovement = true;
         }
 
         public void GemCollected()
@@ -109,6 +111,7 @@ namespace MandarineStudio.AncientTreasures
         {
             m_eventSystem.Reset();
             ReloadComponents();
+            m_allowMovement = true;
         }
 
         private void ReloadComponents()
@@ -150,7 +153,7 @@ namespace MandarineStudio.AncientTreasures
             m_gameState.Entities.name = "Entities";
             m_playerCharacter = m_lastCheckpoint.SpawnPlayer();
             SubscribePlayerEvents();
-            m_moveEnemies = true;
+            m_allowMovement = true;
         }
 
         void SubscribePlayerEvents()
@@ -162,7 +165,7 @@ namespace MandarineStudio.AncientTreasures
 
         void PlayerDying()
         {
-            m_moveEnemies = false;
+            m_allowMovement = false;
         }
 
         void TakeSnapshot()

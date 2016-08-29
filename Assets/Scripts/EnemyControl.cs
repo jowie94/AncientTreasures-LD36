@@ -53,7 +53,7 @@ namespace MandarineStudio.AncientTreasures
         
         void FixedUpdate()
         {
-            if (m_controller.IsAlive && GameManager.Instance.MoveEnemies)
+            if (m_controller.IsAlive && GameManager.Instance.AllowMovement)
             {
                 bool hasCollided = false;
                 Collider2D[] colliders = Physics2D.OverlapCircleAll(m_sideCollision.position, k_GroundedRadius,
@@ -68,7 +68,7 @@ namespace MandarineStudio.AncientTreasures
                     Flip();
                 m_controller.Move(0.1f*m_direction, false);
             }
-            else if (!GameManager.Instance.MoveEnemies)
+            else if (!GameManager.Instance.AllowMovement)
                 m_controller.Stop();
         }
 
