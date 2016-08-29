@@ -18,7 +18,7 @@ namespace MandarineStudio.AncientTreasures
         const float k_GroundedRadius = .2f;
         private PlatformerCharacterController m_controller;
         private Transform m_sideCollision;
-        private float m_direction = 1f;
+        public float m_direction = 1f;
 
         void OnCollisionEnter2D(Collision2D col)
         {
