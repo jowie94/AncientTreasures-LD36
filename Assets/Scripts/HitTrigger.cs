@@ -16,6 +16,8 @@ namespace MandarineStudio.AncientTreasures
                 Debug.LogError("Trigger name is not specified, disabling trigger " + name);
                 enabled = false;
             }
+            else
+                gameObject.tag = "Hit Trigger";
         }
 
         void WeaponDamage(Damage ignored)

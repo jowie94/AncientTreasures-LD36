@@ -60,7 +60,7 @@ namespace MandarineStudio.AncientTreasures
         {
             Attacking = false;
             m_controller.SetIdle();
-            m_controller.Animator.onFinish.RemoveListener(FinishAttack);
+            m_controller.Animator.onStop.RemoveListener(FinishAttack);
         }
 
         IEnumerator DamageBlink()
