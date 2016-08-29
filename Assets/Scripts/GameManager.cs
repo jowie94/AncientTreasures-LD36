@@ -36,7 +36,7 @@ namespace MandarineStudio.AncientTreasures
         public float Life
         {
             get { return m_gameState.Life; }
-            set { m_gameState.Life = value; }
+            private set { m_gameState.Life = value; }
         }
 
         private static GameManager m_instance;
@@ -81,6 +81,11 @@ namespace MandarineStudio.AncientTreasures
         public void LiveCollected()
         {
             m_playerCharacter.Life += 1;
+        }
+
+        public void KillPlayer()
+        {
+            m_playerCharacter.TriggerDeath();
         }
 
         void LateUpdate()
@@ -139,9 +144,9 @@ namespace MandarineStudio.AncientTreasures
             m_gameState.Entities = Instantiate(m_lastCheckpointState.Entities);
             m_gameState.Entities.SetActive(true);
             m_gameState.Entities.name = "Entities";
-            PlatformerCharacterController pcc = m_lastCheckpoint.SpawnPlayer();
-            pcc.OnLife.AddListener(life => Life = life);
-            pcc.OnDied.AddListener(ReloadCheckpoint);
+            m_playerCharacter = m_lastCheckpoint.SpawnPlayer();
+            m_playerCharacter.OnLife.AddListener(life => Life = life);
+            m_playerCharacter.OnDied.AddListener(ReloadCheckpoint);
         }
 
         void TakeSnapshot()

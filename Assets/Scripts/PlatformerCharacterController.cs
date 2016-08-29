@@ -136,7 +136,7 @@ namespace MandarineStudio.AncientTreasures
 
         public void TriggerDeath()
         {
-            
+            Life = 0;
             m_rigidbody2D.isKinematic = true;
             GetComponent<Collider2D>().isTrigger = true;
             m_animator.Stop();
