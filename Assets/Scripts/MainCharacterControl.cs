@@ -12,6 +12,7 @@ namespace MandarineStudio.AncientTreasures
         private bool m_jump;
         private bool m_blinking = false;
         private Renderer m_renderer;
+        private AudioSource m_hurt;
 
         private bool Attacking
         {
@@ -25,6 +26,7 @@ namespace MandarineStudio.AncientTreasures
             m_weaponBox = transform.Find("WeaponBox");
             m_feetBox = transform.Find("FeetBox");
             m_renderer = GetComponent<Renderer>();
+            m_hurt = GetComponent<AudioSource>();
         }
 
         // Update is called once per frame
@@ -81,6 +83,7 @@ namespace MandarineStudio.AncientTreasures
         {
             if (!m_blinking)
             {
+                m_hurt.Play();
                 m_controller.Damage(damage);
                 if (m_controller.IsAlive)
                     StartCoroutine(DamageBlink());

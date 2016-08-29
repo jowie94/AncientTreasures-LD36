@@ -52,7 +52,7 @@ namespace MandarineStudio.AncientTreasures
         private SpriteAnimator m_animator;
         private bool m_facingRight = true;
         private bool m_grounded = true;
-        
+
         void Awake()
         {
             m_groundCheck = transform.Find("GroundCheck");

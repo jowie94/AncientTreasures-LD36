@@ -15,6 +15,7 @@ namespace MandarineStudio.AncientTreasures
 
         protected override void WeaponDamage(Damage damage)
         {
+            AudioHurt.Play();
             Controller.Animator.onStop.AddListener(Restore);
             Controller.Animator.Play("Die", true);
             m_rigidbody.isKinematic = true;

@@ -3,13 +3,14 @@ using System.Collections;
 
 namespace MandarineStudio.AncientTreasures
 {
-    [RequireComponent(typeof(PlatformerCharacterController))]
+    [RequireComponent(typeof(PlatformerCharacterController), typeof(AudioSource))]
     public abstract class EnemyControl : MonoBehaviour
     {
         protected PlatformerCharacterController Controller
         {
             get { return m_controller; }
         }
+        protected AudioSource AudioHurt;
 
         [SerializeField] private LayerMask m_WhatIsWall;
         [SerializeField] private float m_damage;
@@ -49,6 +50,7 @@ namespace MandarineStudio.AncientTreasures
         {
             m_controller = GetComponent<PlatformerCharacterController>();
             m_sideCollision = transform.Find("SideCollisionDetector");
+            AudioHurt = GetComponent<AudioSource>();
         }
         
         void FixedUpdate()
