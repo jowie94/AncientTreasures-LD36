@@ -18,11 +18,11 @@ namespace MandarineStudio.AncientTreasures
         {
             if (other.gameObject.tag == "Player")
             {
+                enabled = false;
                 m_rupee.Play();
                 m_renderer.enabled = false;
                 GameManager.Instance.GemCollected();
                 Destroy(gameObject, m_rupee.clip.length);
-                enabled = false;
             }
         }
     }

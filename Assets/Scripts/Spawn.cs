@@ -8,7 +8,7 @@ namespace MandarineStudio.AncientTreasures
     {
         public bool IsCheckpoint = false;
 
-        void OnTrigerEnter2D(Collider2D other)
+        void OnTriggerEnter2D(Collider2D other)
         {
             if (IsCheckpoint)
                 GameManager.Instance.Checkpoint(this);
@@ -28,7 +28,7 @@ namespace MandarineStudio.AncientTreasures
 
         void Start()
         {
-            if (GameManager.Instance.SpawnPlayer)
+            if (GameManager.Instance.SpawnPlayer && !IsCheckpoint)
                 GameManager.Instance.PlayerSpawned(SpawnPlayer());
         }
     }
