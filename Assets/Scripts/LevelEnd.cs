@@ -9,7 +9,8 @@ namespace MandarineStudio.AncientTreasures
 
         void OnTriggerEnter2D(Collider2D col)
         {
-            GameManager.Instance.LoadLevel(NextLevel);
+            if (col.tag == "Player")
+                GameManager.Instance.LoadLevel(NextLevel);
         }
     }
 }
