@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: f28d52efc31a1d84eb2447d00253c23d
-timeCreated: 1472395979
+timeCreated: 1472485151
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -31,6 +31,12 @@ TextureImporter:
     21300048: WallBrick_Left
     21300050: WallBrick_Mid
     21300052: WallBrick_Right
+    21300054: Door_UpLeft_Stairs
+    21300056: Door_UpRight_Stairs
+    21300058: Door_UpMid_Stairs
+    21300060: Door_LeftBot_Stairs
+    21300062: Door_MidtBot_Stairs
+    21300064: Door_RightBot_Stairs
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -395,6 +401,78 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 128
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: Door_UpLeft_Stairs
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: Door_UpRight_Stairs
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: Door_UpMid_Stairs
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: Door_LeftBot_Stairs
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: Door_MidtBot_Stairs
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: Door_RightBot_Stairs
+      rect:
+        serializedVersion: 2
+        x: 224
         y: 192
         width: 32
         height: 32
