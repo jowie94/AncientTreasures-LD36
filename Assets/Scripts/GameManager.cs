@@ -50,8 +50,15 @@ namespace MandarineStudio.AncientTreasures
 
         void Awake()
         {
+            if (m_instance == null)
+                m_instance = this;
             m_gameState = ScriptableObject.CreateInstance<GameState>();
             ReloadComponents();
+        }
+
+        public void ChestOpened(float amount)
+        {
+            m_gameState.Score += amount;
         }
 
         public void GemCollected()

@@ -4,7 +4,7 @@ using System.Collections;
 namespace MandarineStudio.AncientTreasures
 {
     [RequireComponent(typeof(BoxCollider2D))]
-    public class UseOnPlayer : MonoBehaviour
+    public class UseOnPlayerTrigger : MonoBehaviour
     {
         public string FunctionToCall = "";
         public bool OneShot = true;
