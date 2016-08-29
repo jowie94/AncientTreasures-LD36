@@ -6,10 +6,13 @@ namespace MandarineStudio.AncientTreasures
     [RequireComponent(typeof(PlatformerCharacterController), typeof(AudioSource))]
     public abstract class EnemyControl : MonoBehaviour
     {
+        public float Direction = 1f;
+
         protected PlatformerCharacterController Controller
         {
             get { return m_controller; }
         }
+
         protected AudioSource AudioHurt;
 
         [SerializeField] private LayerMask m_WhatIsWall;
@@ -18,7 +21,6 @@ namespace MandarineStudio.AncientTreasures
         const float k_GroundedRadius = .2f;
         private PlatformerCharacterController m_controller;
         private Transform m_sideCollision;
-        public float m_direction = 1f;
 
         void OnCollisionEnter2D(Collision2D col)
         {
@@ -68,7 +70,7 @@ namespace MandarineStudio.AncientTreasures
 
                 if (hasCollided)
                     Flip();
-                m_controller.Move(0.1f*m_direction, false);
+                m_controller.Move(0.1f*Direction, false);
             }
             else if (!GameManager.Instance.AllowMovement)
                 m_controller.Stop();
@@ -76,7 +78,7 @@ namespace MandarineStudio.AncientTreasures
 
         protected void Flip()
         {
-            m_direction *= -1;
+            Direction *= -1;
         }
     }
 }
