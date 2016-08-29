@@ -16,7 +16,7 @@ namespace MandarineStudio.AncientTreasures
 
         void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.tag == "Player")
+            if (other.gameObject.tag == "Player" && enabled)
             {
                 enabled = false;
                 m_rupee.Play();
