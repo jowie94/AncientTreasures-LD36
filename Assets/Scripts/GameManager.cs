@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.Runtime.Remoting.Lifetime;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -17,7 +15,6 @@ namespace MandarineStudio.AncientTreasures
                     GameObject go = new GameObject();
                     m_instance = go.AddComponent<GameManager>();
                     go.name = "Game Manager";
-                    DontDestroyOnLoad(go);   
                 }
                 return m_instance;
             }
@@ -60,6 +57,7 @@ namespace MandarineStudio.AncientTreasures
         {
             if (m_instance == null)
                 m_instance = this;
+            DontDestroyOnLoad(gameObject);
             m_gameState = ScriptableObject.CreateInstance<GameState>();
             ReloadComponents();
         }
@@ -72,6 +70,8 @@ namespace MandarineStudio.AncientTreasures
         public void SpecialChestOpened()
         {
             m_allowMovement = false;
+            AudioClip clip = Resources.Load<AudioClip>("Audio/Win");
+            AudioSource.PlayClipAtPoint(clip, m_playerCharacter.transform.position);
             m_playerCharacter.Animator.Play("Win", true);
             m_playerCharacter.Animator.onStop.AddListener(Won);
         }
@@ -190,6 +190,12 @@ namespace MandarineStudio.AncientTreasures
         public void LoadGame()
         {
             
+        }
+
+        public void GoToMenu()
+        {
+            Destroy(gameObject);
+            LoadLevel("MainMenu");
         }
     }
 }
