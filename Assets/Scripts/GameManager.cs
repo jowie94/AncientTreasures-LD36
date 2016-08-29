@@ -39,6 +39,11 @@ namespace MandarineStudio.AncientTreasures
             private set { m_gameState.Life = value; }
         }
 
+        public bool MoveEnemies
+        {
+            get { return m_moveEnemies; }
+        }
+
         private static GameManager m_instance;
         private EventSystem m_eventSystem = new EventSystem();
         private Text m_scoreText;
@@ -47,6 +52,7 @@ namespace MandarineStudio.AncientTreasures
         private Spawn m_lastCheckpoint;
         private GameState m_gameState;
         private PlatformerCharacterController m_playerCharacter;
+        private bool m_moveEnemies = true;
 
         void Awake()
         {
@@ -116,10 +122,7 @@ namespace MandarineStudio.AncientTreasures
             {
                 m_playerCharacter = obj.GetComponent<PlatformerCharacterController>();
                 if (m_playerCharacter)
-                {
-                    m_playerCharacter.OnLife.AddListener(life => Life = life);
-                    m_playerCharacter.OnDied.AddListener(ReloadCheckpoint);
-                }
+                    SubscribePlayerEvents();
             }
             obj = GameObject.Find("Spawn");
             if (obj)
@@ -145,8 +148,20 @@ namespace MandarineStudio.AncientTreasures
             m_gameState.Entities.SetActive(true);
             m_gameState.Entities.name = "Entities";
             m_playerCharacter = m_lastCheckpoint.SpawnPlayer();
+            SubscribePlayerEvents();
+            m_moveEnemies = true;
+        }
+
+        void SubscribePlayerEvents()
+        {
             m_playerCharacter.OnLife.AddListener(life => Life = life);
             m_playerCharacter.OnDied.AddListener(ReloadCheckpoint);
+            m_playerCharacter.OnDying.AddListener(PlayerDying);
+        }
+
+        void PlayerDying()
+        {
+            m_moveEnemies = false;
         }
 
         void TakeSnapshot()

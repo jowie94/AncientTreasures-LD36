@@ -37,6 +37,7 @@ namespace MandarineStudio.AncientTreasures
         }
 
         public UnityEvent OnDied = new UnityEvent();
+        public UnityEvent OnDying = new UnityEvent();
         public LifeEvent OnLife = new LifeEvent();
 
         [SerializeField] private float m_JumpForce = 100f;
@@ -137,6 +138,7 @@ namespace MandarineStudio.AncientTreasures
         public void TriggerDeath()
         {
             Life = 0;
+            OnDying.Invoke();
             m_rigidbody2D.isKinematic = true;
             GetComponent<Collider2D>().isTrigger = true;
             m_animator.Stop();
@@ -148,8 +150,15 @@ namespace MandarineStudio.AncientTreasures
         {
             OnDied.Invoke();
             OnDied.RemoveAllListeners();
+            OnDying.RemoveAllListeners();
             OnLife.RemoveAllListeners();
             Destroy(gameObject);
+        }
+
+        public void Stop()
+        {
+            m_rigidbody2D.velocity = Vector2.zero;
+            m_animator.Stop();
         }
 
         public void SetIdle()
