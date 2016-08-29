@@ -7,7 +7,6 @@ namespace MandarineStudio.AncientTreasures
     public class MainCharacterControl : MonoBehaviour
     {
         private PlatformerCharacterController m_controller;
-        private Rigidbody2D m_rigidbody;
         private Transform m_weaponBox;
         private Transform m_feetBox;
         private bool m_jump;
@@ -25,7 +24,6 @@ namespace MandarineStudio.AncientTreasures
             m_controller = GetComponent<PlatformerCharacterController>();
             m_weaponBox = transform.Find("WeaponBox");
             m_feetBox = transform.Find("FeetBox");
-            m_rigidbody = GetComponent<Rigidbody2D>();
             m_renderer = GetComponent<Renderer>();
         }
 
@@ -53,14 +51,16 @@ namespace MandarineStudio.AncientTreasures
         void Attack()
         {
             Attacking = true;
-            m_rigidbody.velocity = Vector2.zero;
+            m_controller.Stop();
             m_controller.Animator.Play("Attack", true);
-            m_controller.Animator.onFinish.AddListener(() =>
-            {
-                Attacking = false;
-                m_controller.SetIdle();
-                //m_controller.Animator.onFinish.RemoveListener();
-            });
+            m_controller.Animator.onStop.AddListener(FinishAttack);
+        }
+
+        void FinishAttack()
+        {
+            Attacking = false;
+            m_controller.SetIdle();
+            m_controller.Animator.onFinish.RemoveListener(FinishAttack);
         }
 
         IEnumerator DamageBlink()
