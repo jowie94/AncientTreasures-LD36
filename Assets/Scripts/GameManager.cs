@@ -102,9 +102,9 @@ namespace MandarineStudio.AncientTreasures
         {
             // Update screen text
             if (m_scoreText != null)
-                m_scoreText.text = "Score: " + Score;
+                m_scoreText.text = Score.ToString();
             if (m_lifeText != null)
-                m_lifeText.text = "Life: " + Life;
+                m_lifeText.text = Life.ToString();
         }
 
         void OnLevelWasLoaded()
