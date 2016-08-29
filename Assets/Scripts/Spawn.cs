@@ -28,7 +28,8 @@ namespace MandarineStudio.AncientTreasures
 
         void Start()
         {
-            SpawnPlayer();
+            if (GameManager.Instance.SpawnPlayer)
+                GameManager.Instance.PlayerSpawned(SpawnPlayer());
         }
     }
 }

@@ -149,9 +149,9 @@ namespace MandarineStudio.AncientTreasures
         public void Die()
         {
             OnDied.Invoke();
-            OnDied.RemoveAllListeners();
             OnDying.RemoveAllListeners();
             OnLife.RemoveAllListeners();
+            OnDied.RemoveAllListeners();
             Destroy(gameObject);
         }
 

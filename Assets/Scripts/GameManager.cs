@@ -44,6 +44,8 @@ namespace MandarineStudio.AncientTreasures
             get { return m_moveEnemies; }
         }
 
+        public bool SpawnPlayer = true;
+
         private static GameManager m_instance;
         private EventSystem m_eventSystem = new EventSystem();
         private Text m_scoreText;
@@ -117,13 +119,6 @@ namespace MandarineStudio.AncientTreasures
             obj = GameObject.Find("LifeText");
             if (obj != null)
                 m_lifeText = obj.GetComponent<Text>();
-            obj = GameObject.Find("Player");
-            if (obj != null)
-            {
-                m_playerCharacter = obj.GetComponent<PlatformerCharacterController>();
-                if (m_playerCharacter)
-                    SubscribePlayerEvents();
-            }
             obj = GameObject.Find("Spawn");
             if (obj)
             {
@@ -131,6 +126,12 @@ namespace MandarineStudio.AncientTreasures
                 m_gameState.Entities = GameObject.Find("Entities");
                 TakeSnapshot();
             }
+        }
+
+        public void PlayerSpawned(PlatformerCharacterController player)
+        {
+            m_playerCharacter = player;
+            SubscribePlayerEvents();
         }
 
         public void Checkpoint(Spawn spawn)
