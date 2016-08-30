@@ -49,6 +49,7 @@ namespace MandarineStudio.AncientTreasures
         private Transform m_groundCheck;
         const float k_GroundedRadius = .2f;
         private Rigidbody2D m_rigidbody2D;
+        private Collider2D m_collider;
         private SpriteAnimator m_animator;
         private bool m_facingRight = true;
         private bool m_grounded = true;
@@ -58,6 +59,7 @@ namespace MandarineStudio.AncientTreasures
             m_groundCheck = transform.Find("GroundCheck");
             m_rigidbody2D = GetComponent<Rigidbody2D>();
             m_animator = GetComponent<SpriteAnimator>();
+            m_collider = GetComponent<Collider2D>() ?? GetComponent<EdgeCollider2D>();
         }
 
         void FixedUpdate()
@@ -140,7 +142,7 @@ namespace MandarineStudio.AncientTreasures
             Life = 0;
             OnDying.Invoke();
             m_rigidbody2D.isKinematic = true;
-            GetComponent<Collider2D>().isTrigger = true;
+            m_collider.isTrigger = true;
             m_animator.Stop();
             m_animator.onStop.AddListener(Die);
             m_animator.Play("Die", true);
