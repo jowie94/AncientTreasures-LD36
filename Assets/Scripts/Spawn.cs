@@ -8,14 +8,20 @@ namespace MandarineStudio.AncientTreasures
     {
         public bool IsCheckpoint = false;
 
+        private bool m_used = false;
+
         void OnTriggerEnter2D(Collider2D other)
         {
-            if (IsCheckpoint)
+            if (IsCheckpoint && !m_used)
+            {
                 GameManager.Instance.Checkpoint(this);
+                m_used = true;
+            }
         }
 
         public PlatformerCharacterController SpawnPlayer()
         {
+            m_used = true;
             GameObject player = (GameObject) Instantiate(Resources.Load("Prefabs/Player"));
             player.name = "Player";
             player.transform.position = transform.position;
@@ -28,6 +34,7 @@ namespace MandarineStudio.AncientTreasures
 
         void Start()
         {
+            m_used = !IsCheckpoint;
             if (GameManager.Instance.SpawnPlayer && !IsCheckpoint)
                 GameManager.Instance.PlayerSpawned(SpawnPlayer());
         }

@@ -139,6 +139,8 @@ namespace MandarineStudio.AncientTreasures
 
         public void Checkpoint(Spawn spawn)
         {
+            Destroy(m_lastCheckpointState.Entities);
+            Destroy(m_lastCheckpointState);
             TakeSnapshot();
             m_lastCheckpoint = spawn;
         }
