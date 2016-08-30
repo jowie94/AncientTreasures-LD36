@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 3bc46d37e80e89942aaab7bc4278e9ff
-timeCreated: 1472464891
+timeCreated: 1472517013
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -16,6 +16,8 @@ TextureImporter:
     21300018: Stone
     21300020: Rupee
     21300022: Heart
+    21300024: Chest_Rupee2
+    21300026: Chest_Rupee1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -201,6 +203,30 @@ TextureImporter:
         serializedVersion: 2
         x: 96
         y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: Chest_Rupee2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: Chest_Rupee1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
         width: 32
         height: 32
       alignment: 0
