@@ -10,8 +10,8 @@ You are in a pyramid full of treasures and you want to get rich, but beware, the
 - X to interact (Pull the lever to make walls disappear)
 
 ## Team ⌨
-- Joel Lopez (Jowie) [@jowie_94](twitter.com/jowie_94) - Coding 
-- Clara García (Shandy) [@shaandy92](twitter.com/shaandy92) - Art 
+- Joel Lopez (Jowie) [@jowie_94](https://twitter.com/jowie_94) - Coding 
+- Clara García (Shandy) [@shaandy92](https://twitter.com/shaandy92) - Art 
 
 Mandarine Studio 
 http://www.mandarinestudio.com
