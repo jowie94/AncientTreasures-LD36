@@ -21,3 +21,6 @@ http://www.mandarinestudio.com
 - Kevin MacLeod (incompetech.com) - Overworld 
 - LittleRobotSoundFactory – Open_00 
 - LittleRobotSoundFactory – Jingle_Win_00 
+
+## License
+The code is free to use for educational purposes, but all the artwork and assets are copyrighted and can't be used outside this game.
